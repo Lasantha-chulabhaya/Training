@@ -13,4 +13,8 @@ public interface BookRepo extends JpaRepository<Book, Long> {
 
     @Query("SELECT b FROM Book b WHERE b.status = 'ACTIVE'")
     List<Book> findAllActive();
+
+    List<Book> findAllByTitle(String title);
+
+    Book findByIsbn(String isbn);
 }

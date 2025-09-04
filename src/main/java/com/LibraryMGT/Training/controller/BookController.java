@@ -57,4 +57,24 @@ public class BookController {
                 HttpStatus.OK
         );
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<StandardResponse> searchBooks(@RequestParam(required = false) String title,
+                                                     @RequestParam(required = false) String isbn)
+    {
+        if (title != null) {
+            List<BookDTO> books = bookService.searchBooksByTitle(title);
+            return new ResponseEntity<StandardResponse>(
+                    new StandardResponse(200, "Found Results ", books),
+                    HttpStatus.OK
+            );
+        } else if (isbn != null) {
+            BookDTO book = bookService.searchBookByIsbn(isbn);
+            return new ResponseEntity<StandardResponse>(
+                    new StandardResponse(200, "Found Results ", book),
+                    HttpStatus.OK
+            );
+        }
+        return ResponseEntity.badRequest().build();
+    }
 }

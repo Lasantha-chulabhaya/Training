@@ -13,4 +13,8 @@ public interface BookService {
     BookDTO getBookById(Long id);
 
     List<BookDTO> getAvailableBooks();
+
+    List<BookDTO> searchBooksByTitle(String title);
+
+    BookDTO searchBookByIsbn(String isbn);
 }

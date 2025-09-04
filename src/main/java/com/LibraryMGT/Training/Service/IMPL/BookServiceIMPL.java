@@ -199,4 +199,54 @@ public class BookServiceIMPL implements BookService {
         return bookDTOs;
 
     }
+
+    @Override
+    public List<BookDTO> searchBooksByTitle(String title) {
+       List<Book> books =  bookRepo.findAllByTitle(title);
+       if (books.isEmpty()) {
+           throw new NotFoundException("No books found");
+       }
+       List<BookDTO> bookDTOs = new ArrayList<>();
+       for (Book book : books) {
+           BookDTO bookDTO = new BookDTO();
+           bookDTO.setBookId(book.getBookId());
+           bookDTO.setIsbn(book.getIsbn());
+           bookDTO.setTitle(book.getTitle());
+           bookDTO.setPublicationYear(book.getPublicationYear());
+           bookDTO.setTotalCopies(book.getTotalCopies());
+           bookDTO.setAvailableCopies(book.getAvailableCopies());
+           bookDTO.setStatus(book.getStatus());
+
+           CategoryDTO categoryDTO = new CategoryDTO();
+           categoryDTO.setCategoryId(book.getCategory().getCategoryId());
+           categoryDTO.setName(book.getCategory().getName());
+           categoryDTO.setDescription(book.getCategory().getDescription());
+           bookDTO.setCategory(categoryDTO);
+
+           List<AuthorDTO> authorDTOs = new ArrayList<>();
+           for (Author author : book.getAuthors()) {
+               AuthorDTO authorDTO = new AuthorDTO();
+               authorDTO.setAuthorId(author.getAuthorId());
+               authorDTO.setName(author.getName());
+               authorDTO.setEmail(author.getEmail());
+               authorDTO.setBirthYear(author.getBirthYear());
+               authorDTOs.add(authorDTO);
+               bookDTO.setAuthors(authorDTOs);
+               bookDTOs.add(bookDTO);
+
+           }
+       }
+       return bookDTOs;
+
+    }
+
+    @Override
+    public BookDTO searchBookByIsbn(String isbn) {
+        Book book = bookRepo.findByIsbn(isbn);
+        if (book == null) {
+            throw new NotFoundException("Book not found");
+        }
+        BookDTO bookDTO = modelMapper.map(book, BookDTO.class);
+        return bookDTO;
+    }
 }
