@@ -31,7 +31,16 @@ public class MemberController {
     public ResponseEntity<StandardResponse> createMember(@RequestBody MemberCreateDTO memberCreateDTO) {
         MemberDTO createdMember = memberService.createMember(memberCreateDTO);
         return new ResponseEntity<StandardResponse>(
-                new StandardResponse(200, "Success", createdMember),
+                new StandardResponse(201, "Success", createdMember),
+                HttpStatus.CREATED
+        );
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<StandardResponse> getMemberById(@PathVariable Long id) {
+        MemberDTO member = memberService.getMemberById(id);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Success", member),
                 HttpStatus.OK
         );
     }

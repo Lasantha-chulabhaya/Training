@@ -9,4 +9,6 @@ public interface MemberService {
     List<MemberDTO> getAllMembers();
 
     MemberDTO createMember(MemberCreateDTO memberCreateDTO);
+
+    MemberDTO getMemberById(Long id);
 }

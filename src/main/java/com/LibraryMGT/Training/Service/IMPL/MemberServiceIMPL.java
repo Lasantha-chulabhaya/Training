@@ -64,13 +64,25 @@ public class MemberServiceIMPL implements MemberService {
                 .joinDate(LocalDate.now())
                 .status(Member.MemberStatus.ACTIVE)
                 .build();
-//        Author author = new Author();
-//        author.setName(authorCreateDTO.getName());
-//        author.setEmail(authorCreateDTO.getEmail());
-//        author.setBirthYear(authorCreateDTO.getBirthYear());
 
         Member saveMember = memberRepo.save(member);
         return modelMapper.map(saveMember, MemberDTO.class);
+    }
+
+    @Override
+    public MemberDTO getMemberById(Long id) {
+        Member member = memberRepo.findById(id).get();
+        if (member==null)
+            throw new NotFoundException("Member with id " + id + " not found");
+        MemberDTO memberDTO = MemberDTO.builder()
+                .memberId(member.getMemberId())
+                .name(member.getName())
+                .email(member.getEmail())
+                .phone(member.getPhone())
+                .joinDate(member.getJoinDate())
+                .status(member.getStatus())
+                .build();
+        return memberDTO;
     }
 }
 
