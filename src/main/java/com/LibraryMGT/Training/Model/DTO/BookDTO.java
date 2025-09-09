@@ -1,8 +1,11 @@
 package com.LibraryMGT.Training.Model.DTO;
 
 import com.LibraryMGT.Training.Model.Entity.Book;
+import lombok.Builder;
 
 import java.util.List;
+
+@Builder
 
 public class BookDTO {
 

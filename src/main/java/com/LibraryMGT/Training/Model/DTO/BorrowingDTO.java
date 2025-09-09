@@ -2,6 +2,7 @@ package com.LibraryMGT.Training.Model.DTO;
 
 import com.LibraryMGT.Training.Model.Entity.Borrowing;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class BorrowingDTO {
     private Long borrowId;
     private MemberDTO member;

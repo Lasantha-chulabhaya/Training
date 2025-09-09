@@ -1,5 +1,6 @@
 package com.LibraryMGT.Training.controller;
 
+import com.LibraryMGT.Training.Model.DTO.BorrowingDTO;
 import com.LibraryMGT.Training.Model.DTO.MemberCreateDTO;
 import com.LibraryMGT.Training.Model.DTO.MemberDTO;
 import com.LibraryMGT.Training.Service.MemberService;
@@ -41,6 +42,15 @@ public class MemberController {
         MemberDTO member = memberService.getMemberById(id);
         return new ResponseEntity<StandardResponse>(
                 new StandardResponse(200, "Success", member),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/{id}/borrowings")
+    public ResponseEntity<StandardResponse> getMemberBorrowings(@PathVariable Long id) {
+        List<BorrowingDTO> borrowings = memberService.getMemberBorrowings(id);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Success", borrowings),
                 HttpStatus.OK
         );
     }

@@ -1,5 +1,6 @@
 package com.LibraryMGT.Training.Service;
 
+import com.LibraryMGT.Training.Model.DTO.BorrowingDTO;
 import com.LibraryMGT.Training.Model.DTO.MemberCreateDTO;
 import com.LibraryMGT.Training.Model.DTO.MemberDTO;
 
@@ -11,4 +12,6 @@ public interface MemberService {
     MemberDTO createMember(MemberCreateDTO memberCreateDTO);
 
     MemberDTO getMemberById(Long id);
+
+    List<BorrowingDTO> getMemberBorrowings(Long id);
 }
