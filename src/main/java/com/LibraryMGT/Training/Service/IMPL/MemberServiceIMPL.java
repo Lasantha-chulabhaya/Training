@@ -34,7 +34,7 @@ public class MemberServiceIMPL implements MemberService {
         List<Member> allMembers = memberRepo.findAll();
 
         if (allMembers.isEmpty()) {
-            throw new NotFoundException("No members found");
+            throw new NotFoundException("No Member found");
         }
 
         List<MemberDTO> memberDTOList = new ArrayList<>();
