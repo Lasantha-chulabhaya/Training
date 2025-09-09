@@ -1,9 +1,9 @@
 package com.LibraryMGT.Training.Service.IMPL;
 
-import com.LibraryMGT.Training.Model.Author;
-import com.LibraryMGT.Training.Model.AuthorCreateDTO;
-import com.LibraryMGT.Training.Model.AuthorDTO;
-import com.LibraryMGT.Training.Model.AuthorWithBooksDTO;
+import com.LibraryMGT.Training.Model.Entity.Author;
+import com.LibraryMGT.Training.Model.DTO.AuthorCreateDTO;
+import com.LibraryMGT.Training.Model.DTO.AuthorDTO;
+import com.LibraryMGT.Training.Model.DTO.AuthorWithBooksDTO;
 import com.LibraryMGT.Training.Service.AuthorService;
 import com.LibraryMGT.Training.exceptions.EntryDuplicateException;
 import com.LibraryMGT.Training.exceptions.NotFoundException;
@@ -30,10 +30,15 @@ public class AuthorServiceIMPL implements AuthorService {
         if(authorRepo.existsByEmail(authorCreateDTO.getEmail())){
             throw new EntryDuplicateException("author with email " + authorCreateDTO.getEmail() + " already exists");
         }
-        Author author = new Author();
-        author.setName(authorCreateDTO.getName());
-        author.setEmail(authorCreateDTO.getEmail());
-        author.setBirthYear(authorCreateDTO.getBirthYear());
+        Author author = Author.builder()
+                .name(authorCreateDTO.getName())
+                .email(authorCreateDTO.getEmail())
+                .birthYear(authorCreateDTO.getBirthYear())
+                .build();
+//        Author author = new Author();
+//        author.setName(authorCreateDTO.getName());
+//        author.setEmail(authorCreateDTO.getEmail());
+//        author.setBirthYear(authorCreateDTO.getBirthYear());
 
         Author savedAuthor = authorRepo.save(author);
         return modelMapper.map(savedAuthor, AuthorDTO.class);

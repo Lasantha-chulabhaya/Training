@@ -1,4 +1,4 @@
-package com.LibraryMGT.Training.Model;
+package com.LibraryMGT.Training.Model.DTO;
 
 public class BookSummaryDTO {
     private Long bookId;

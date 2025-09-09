@@ -1,7 +1,8 @@
-package com.LibraryMGT.Training.Model;
+package com.LibraryMGT.Training.Model.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,10 +10,11 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
-@Table(name = "members")
+@Table(name = "member")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

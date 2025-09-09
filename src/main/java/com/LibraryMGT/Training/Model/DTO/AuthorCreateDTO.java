@@ -1,8 +1,4 @@
-package com.LibraryMGT.Training.Model;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+package com.LibraryMGT.Training.Model.DTO;
 
 //@Data
 //@AllArgsConstructor

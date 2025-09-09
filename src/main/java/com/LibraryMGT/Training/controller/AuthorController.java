@@ -1,8 +1,8 @@
 package com.LibraryMGT.Training.controller;
 
-import com.LibraryMGT.Training.Model.AuthorCreateDTO;
-import com.LibraryMGT.Training.Model.AuthorDTO;
-import com.LibraryMGT.Training.Model.AuthorWithBooksDTO;
+import com.LibraryMGT.Training.Model.DTO.AuthorCreateDTO;
+import com.LibraryMGT.Training.Model.DTO.AuthorDTO;
+import com.LibraryMGT.Training.Model.DTO.AuthorWithBooksDTO;
 import com.LibraryMGT.Training.Service.AuthorService;
 import com.LibraryMGT.Training.util.StandardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
-    @PostMapping("/create")
+    @PostMapping()
     public ResponseEntity<StandardResponse> createAuthor(@RequestBody AuthorCreateDTO authorCreateDTO) {
         AuthorDTO createdAuthor = authorService.createAuthor(authorCreateDTO);
         return new ResponseEntity<StandardResponse>(
@@ -28,7 +28,7 @@ public class AuthorController {
         );
     }
 
-    @GetMapping("/get-all-authors")
+    @GetMapping
     public ResponseEntity<StandardResponse> getAllAuthors() {
         List<AuthorDTO> authors = authorService.getAllAuthors();
         return new ResponseEntity<StandardResponse>(

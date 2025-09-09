@@ -1,8 +1,8 @@
 package com.LibraryMGT.Training.Service;
 
-import com.LibraryMGT.Training.Model.AuthorCreateDTO;
-import com.LibraryMGT.Training.Model.AuthorDTO;
-import com.LibraryMGT.Training.Model.AuthorWithBooksDTO;
+import com.LibraryMGT.Training.Model.DTO.AuthorCreateDTO;
+import com.LibraryMGT.Training.Model.DTO.AuthorDTO;
+import com.LibraryMGT.Training.Model.DTO.AuthorWithBooksDTO;
 
 import java.util.List;
 

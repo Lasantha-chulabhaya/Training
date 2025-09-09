@@ -1,12 +1,11 @@
-package com.LibraryMGT.Training.Model;
+package com.LibraryMGT.Training.Model.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
 
 import java.util.List;
 
 //@Data
+@Builder
 //@AllArgsConstructor
 //@NoArgsConstructor
 public class AuthorDTO {

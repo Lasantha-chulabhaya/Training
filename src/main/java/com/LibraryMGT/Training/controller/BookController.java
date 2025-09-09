@@ -1,8 +1,7 @@
 package com.LibraryMGT.Training.controller;
 
-import com.LibraryMGT.Training.Model.AuthorWithBooksDTO;
-import com.LibraryMGT.Training.Model.BookCreateDTO;
-import com.LibraryMGT.Training.Model.BookDTO;
+import com.LibraryMGT.Training.Model.DTO.BookCreateDTO;
+import com.LibraryMGT.Training.Model.DTO.BookDTO;
 import com.LibraryMGT.Training.Service.AuthorService;
 import com.LibraryMGT.Training.Service.BookService;
 import com.LibraryMGT.Training.util.StandardResponse;

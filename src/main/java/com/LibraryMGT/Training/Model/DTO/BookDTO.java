@@ -1,4 +1,6 @@
-package com.LibraryMGT.Training.Model;
+package com.LibraryMGT.Training.Model.DTO;
+
+import com.LibraryMGT.Training.Model.Entity.Book;
 
 import java.util.List;
 

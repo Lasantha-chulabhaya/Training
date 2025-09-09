@@ -1,6 +1,6 @@
 package com.LibraryMGT.Training.repo;
 
-import com.LibraryMGT.Training.Model.Category;
+import com.LibraryMGT.Training.Model.Entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

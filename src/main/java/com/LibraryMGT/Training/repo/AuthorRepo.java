@@ -1,6 +1,6 @@
 package com.LibraryMGT.Training.repo;
 
-import com.LibraryMGT.Training.Model.Author;
+import com.LibraryMGT.Training.Model.Entity.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

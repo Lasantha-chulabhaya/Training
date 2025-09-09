@@ -1,9 +1,6 @@
-package com.LibraryMGT.Training.Model;
+package com.LibraryMGT.Training.Model.Entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Set;
 

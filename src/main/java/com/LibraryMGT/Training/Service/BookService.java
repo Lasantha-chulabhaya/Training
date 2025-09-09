@@ -1,7 +1,7 @@
 package com.LibraryMGT.Training.Service;
 
-import com.LibraryMGT.Training.Model.BookCreateDTO;
-import com.LibraryMGT.Training.Model.BookDTO;
+import com.LibraryMGT.Training.Model.DTO.BookCreateDTO;
+import com.LibraryMGT.Training.Model.DTO.BookDTO;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.LibraryMGT.Training.Model;
+package com.LibraryMGT.Training.Model.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

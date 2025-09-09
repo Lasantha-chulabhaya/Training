@@ -1,22 +1,31 @@
-package com.LibraryMGT.Training.Model;
+package com.LibraryMGT.Training.Model.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
 
 //@AllArgsConstructor
 //@NoArgsConstructor
 //@Data
-public class CategoryCreateDTO {
+@Builder
+public class CategoryDTO {
+    private Long categoryId;
     private String name;
     private String description;
 
-    public CategoryCreateDTO() {
+    public CategoryDTO() {
     }
 
-    public CategoryCreateDTO(String name, String description) {
+    public CategoryDTO(Long categoryId, String name, String description) {
+        this.categoryId = categoryId;
         this.name = name;
         this.description = description;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {
