@@ -16,4 +16,10 @@ public interface MemberService {
     List<BorrowingDTO> getMemberBorrowings(Long id);
 
     List<BorrowingDTO> getMemberCurrentBorrowings(Long id);
+
+    MemberDTO searchMemberByEmail(String email);
+
+    List<MemberDTO> getActiveMembers();
+
+    MemberDTO updateMember(Long id, MemberCreateDTO memberCreateDTO);
 }

@@ -18,4 +18,12 @@ public interface MemberRepo extends JpaRepository<Member, Long> {
 
     @Query("SELECT b FROM Borrowing b JOIN FETCH b.member m JOIN FETCH b.book bk WHERE m.memberId = :memberId")
     List<Borrowing> findBorrowingsByMemberId(@Param("memberId") Long memberId);
+
+    @Query("SELECT b FROM Borrowing b JOIN FETCH b.member m JOIN FETCH b.book bk WHERE m.memberId = :memberId AND b.returnDate IS NULL")
+    List<Borrowing> findCurrentBorrowingsByMemberId(@Param("memberId") Long memberId);
+
+    Member findByEmail(String email);
+
+    @Query("SELECT m FROM Member m WHERE m.status = 'ACTIVE'")
+    List<Member> findAllActive();
 }

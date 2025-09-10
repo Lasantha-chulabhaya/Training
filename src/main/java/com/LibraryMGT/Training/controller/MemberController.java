@@ -63,4 +63,32 @@ public class MemberController {
                 HttpStatus.OK
         );
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<StandardResponse> searchMemberByEmail(@RequestParam String email) {
+        MemberDTO member = memberService.searchMemberByEmail(email);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Success", member),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/active")
+    public ResponseEntity<StandardResponse> getActiveMembers() {
+        List<MemberDTO> members = memberService.getActiveMembers();
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Success", members),
+                HttpStatus.OK
+        );
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<StandardResponse> updateMember(@PathVariable Long id,
+                                                  @RequestBody MemberCreateDTO memberCreateDTO) {
+        MemberDTO updatedMember = memberService.updateMember(id, memberCreateDTO);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Success", updatedMember),
+                HttpStatus.OK
+        );
+    }
 }
