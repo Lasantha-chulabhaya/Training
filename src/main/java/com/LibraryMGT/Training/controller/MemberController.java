@@ -54,4 +54,13 @@ public class MemberController {
                 HttpStatus.OK
         );
     }
+
+    @GetMapping("/{id}/current-borrowings")
+    public ResponseEntity<StandardResponse> getMemberCurrentBorrowings(@PathVariable Long id) {
+        List<BorrowingDTO> borrowings = memberService.getMemberCurrentBorrowings(id);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Success", borrowings),
+                HttpStatus.OK
+        );
+    }
 }

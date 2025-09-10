@@ -89,62 +89,67 @@ public class MemberServiceIMPL implements MemberService {
     @Override
     @Transactional
     public List<BorrowingDTO> getMemberBorrowings(Long id) {
-        if (memberRepo.existsById(id)) {
-            Member member = memberRepo.findByIdWithBorrowings(id).get();
-            if (member.getBorrowings() == null) {
-                throw new NotFoundException("Member with id " + id + " has no borrowings");
-            } else {
-                List<BorrowingDTO> borrowingDTOList = new ArrayList<>();
-
-                for (Borrowing b : member.getBorrowings()) {
-                    // Build MemberDTO
-                    MemberDTO memberDTO = MemberDTO.builder()
-                            .memberId(member.getMemberId())
-                            .name(member.getName())
-                            .email(member.getEmail())
-                            .phone(member.getPhone())
-                            .joinDate(member.getJoinDate())
-                            .status(member.getStatus())
-                            .build();
-
-                    // Build BookDTO (if book exists)
-                    Book book = b.getBook();
-                    BookDTO bookDTO = null;
-                    if (book != null) {
-                        bookDTO = BookDTO.builder()
-                                .bookId(book.getBookId())
-                                .isbn(book.getIsbn())
-                                .title(book.getTitle())
-                                .publicationYear(book.getPublicationYear())
-                                .totalCopies(book.getTotalCopies())
-                                .availableCopies(book.getAvailableCopies())
-                                .status(book.getStatus())
-                                .build();
-                    }
-
-                    // Build BorrowingDTO
-                    BorrowingDTO borrowingDTO = BorrowingDTO.builder()
-                            .borrowId(b.getBorrowId())
-                            .member(memberDTO)
-                            .book(bookDTO)
-                            .borrowDate(b.getBorrowDate())
-                            .dueDate(b.getDueDate())
-                            .returnDate(b.getReturnDate())
-                            .status(b.getStatus())
-                            .build();
-
-                    borrowingDTOList.add(borrowingDTO);
-                }
-
-                return borrowingDTOList;
-            }
-
-
-        } else {
+        // First check if member exists
+        if (!memberRepo.existsById(id)) {
             throw new NotFoundException("Member with id " + id + " not found");
         }
 
+        // Query borrowings directly using the new repository method
+        List<Borrowing> borrowings = memberRepo.findBorrowingsByMemberId(id);
 
+        if (borrowings.isEmpty()) {
+            throw new NotFoundException("Member with id " + id + " has no borrowings");
+        }
+
+        List<BorrowingDTO> borrowingDTOList = new ArrayList<>();
+
+        for (Borrowing borrowing : borrowings) {
+            // Build MemberDTO from the borrowing's member (already fetched via JOIN FETCH)
+            Member member = borrowing.getMember();
+            MemberDTO memberDTO = MemberDTO.builder()
+                    .memberId(member.getMemberId())
+                    .name(member.getName())
+                    .email(member.getEmail())
+                    .phone(member.getPhone())
+                    .joinDate(member.getJoinDate())
+                    .status(member.getStatus())
+                    .build();
+
+            // Build BookDTO from the borrowing's book (already fetched via JOIN FETCH)
+            Book book = borrowing.getBook();
+            BookDTO bookDTO = null;
+            if (book != null) {
+                bookDTO = BookDTO.builder()
+                        .bookId(book.getBookId())
+                        .isbn(book.getIsbn())
+                        .title(book.getTitle())
+                        .publicationYear(book.getPublicationYear())
+                        .totalCopies(book.getTotalCopies())
+                        .availableCopies(book.getAvailableCopies())
+                        .status(book.getStatus())
+                        .build();
+            }
+
+            // Build BorrowingDTO
+            BorrowingDTO borrowingDTO = BorrowingDTO.builder()
+                    .borrowId(borrowing.getBorrowId())
+                    .member(memberDTO)
+                    .book(bookDTO)
+                    .borrowDate(borrowing.getBorrowDate())
+                    .dueDate(borrowing.getDueDate())
+                    .returnDate(borrowing.getReturnDate())
+                    .status(borrowing.getStatus())
+                    .build();
+
+            borrowingDTOList.add(borrowingDTO);
+        }
+
+        return borrowingDTOList;
+    }
+
+    @Override
+    public List<BorrowingDTO> getMemberCurrentBorrowings(Long id) {
+        return List.of();
     }
 }
 

@@ -14,4 +14,6 @@ public interface MemberService {
     MemberDTO getMemberById(Long id);
 
     List<BorrowingDTO> getMemberBorrowings(Long id);
+
+    List<BorrowingDTO> getMemberCurrentBorrowings(Long id);
 }
